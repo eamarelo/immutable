@@ -54,10 +54,16 @@ const initialState = {
 const addContact = (state, action) => ({
   items: state.items.concat(action.contact),
 });
+const deleteContact = (state, action) => ({
+  items: state.items.filter((contact) => contact.id !== action.id),
+});
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionsTypes.ADD_CONTACT:
       return addContact(state, action);
+    case actionsTypes.DELETE_CONTACT:
+      return deleteContact(state, action);
     default:
       return state;
   }
