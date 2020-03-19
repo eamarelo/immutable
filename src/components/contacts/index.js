@@ -1,14 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { deleteContact } from './actions';
 import NameForm from './form';
 
-const Contact = ({ user }) => {
-  const { firstName, phone } = user;
+const Contact = ({ dispatch, user }) => {
+  const { firstName, phone, id } = user;
 
   return (
     <li>
       <span>{`${firstName} ${phone} `}</span>
+      <button
+        type="button"
+        onClick={() => dispatch(deleteContact(id))}
+      >
+        Delete
+      </button>
     </li>
   );
 };
