@@ -54,6 +54,7 @@ const initialState = {
 const addContact = (state, action) => ({
   items: state.items.concat(action.contact),
 });
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionsTypes.ADD_CONTACT:

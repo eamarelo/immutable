@@ -1,5 +1,5 @@
 {
-  "name": "@so-xzen/my-react",
+  "name": "@eamarelo/immutable",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xzen/my-react.git"
+    "url": "git+https://github.com/eamarelo/immutable.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xzen/my-react/issues"
+    "url": "https://github.com/eamarelo/immutable/issues"
   },
-  "homepage": "https://github.com/xzen/my-react#readme",
+  "homepage": "https://github.com/eamarelo/immutable#readme",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
