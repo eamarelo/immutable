@@ -19,7 +19,6 @@ class Form extends React.Component {
 
   handleSubmit(e) {
     const { dispatch } = this.props;
-    console.log(event.target.lastname.value)
     e.preventDefault();
     const user = {
       lastname: event.target.lastname.value,
@@ -29,7 +28,6 @@ class Form extends React.Component {
     };
     this.setState(user);
     dispatch(addContact(user))
-    console.log(user);
   }
 
   handleInputChange(e) {
