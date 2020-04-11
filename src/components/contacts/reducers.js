@@ -1,4 +1,13 @@
+import { List } from 'immutable';
 import actionsTypes from './actions-types';
+
+const CONSTANTS = {
+  addContact: actionsTypes.ADD_CONTACT,
+  deleteContact: actionsTypes.DELETE_CONTACT,
+  updateContact: actionsTypes.UPDATE_CONTACT,
+  searchContact: actionsTypes.SEARCH_CONTACT,
+  initialContact: actionsTypes.INIT_CONTACT,
+};
 
 const initialState = {
   items: [{
@@ -51,9 +60,8 @@ const initialState = {
     city: 'London',
   }],
 };
-const addContact = (state, action) => ({
-  items: state.items.concat(action.contact),
-});
+const addContact = (state, action) => List(state).push(action.contact).toJS();
+
 const deleteContact = (state, action) => ({
   items: state.items.filter((contact) => contact.id !== action.id),
 });
@@ -70,13 +78,13 @@ const editContact = (state, action) => ({
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionsTypes.ADD_CONTACT:
+    case CONSTANTS.addContact:
       return addContact(state, action);
     case actionsTypes.DELETE_CONTACT:
       return deleteContact(state, action);
     case actionsTypes.EDIT_CONTACT:
       return editContact(state, action);
     default:
-      return state;
+      return state.items;
   }
 };

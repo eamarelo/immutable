@@ -60,11 +60,11 @@ const Contact = ({ dispatch, user }) => {
   );
 };
 
-const Contacts = ({ dispatch, items }) => (
+const Contacts = ({ dispatch, contacts }) => (
   <div>
     <NameForm />
     <ul>
-      {items.map((user) => (
+      {contacts.map((user) => (
         <Contact
           key={user.id}
           dispatch={dispatch}
@@ -76,9 +76,8 @@ const Contacts = ({ dispatch, items }) => (
 );
 
 const mapToProps = (state) => {
-  const { items } = state.contacts;
-
-  return ({ items });
+  const { contacts } = state;
+  return ({ contacts });
 };
 
 export default connect(mapToProps)(Contacts);
