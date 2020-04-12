@@ -17,7 +17,7 @@ class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
+  handleSubmit(e, contacts) {
     const { dispatch } = this.props;
     e.preventDefault();
     const user = {
@@ -38,7 +38,7 @@ class Form extends React.Component {
 
   render() {
     const { data } = this.state;
-
+    console.log(data)
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="firstname">
