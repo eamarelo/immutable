@@ -62,11 +62,7 @@ const initialState = {
 };
 const addContact = (state, action) => List(state).push(action.contact).toJS();
 
-const deleteContact = (state, action) => {
-  console.log('staaaaaaaaaate', state);
-  console.log('actioooooons', action.id);
-  return List(state).remove(action.id);
-};
+const deleteContact = (state, action) => List(state).remove(action.id);
 
 const editContact = (state, action) => ({
   items: state.items.map((contact) => {

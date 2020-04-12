@@ -6,7 +6,7 @@ import NameForm from './form';
 
 const Contact = ({ dispatch, user, listId }) => {
   const {
-    firstName, lastname, phone, city, id,
+    firstName, lastname, phone, city,
   } = user;
 
   const [userFirstName, setUserFirstName] = useState(firstName);
@@ -38,7 +38,7 @@ const Contact = ({ dispatch, user, listId }) => {
           )
           : (
             <div>
-              <span>{`${firstName} ${lastname} ${id}`}</span>
+              <span>{`${firstName} ${lastname}`}</span>
               <p>{`Téléphone: ${phone}`}</p>
               <p>{`Ville: ${city}`}</p>
             </div>
