@@ -38,7 +38,6 @@ class Form extends React.Component {
 
   render() {
     const { data } = this.state;
-    console.log(data)
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="firstname">

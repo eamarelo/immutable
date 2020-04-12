@@ -23,3 +23,16 @@ export const updateContact = (contact) => ({
   type: actionsTypes.UPDATE_CONTACT,
   contact,
 });
+
+/*
+* SEARCH contact
+*/
+export const searchContact = (text) => ({
+  type: actionsTypes.SEARCH_CONTACT,
+  text,
+});
+
+export const initialContact = (text) => ({
+  type: actionsTypes.INIT_CONTACT,
+  text,
+});
