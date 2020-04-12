@@ -9,20 +9,20 @@ const Contact = ({ dispatch, user, listId }) => {
     firstName, lastname, phone, city,
   } = user;
 
-  const [userFirstName, setUserFirstName] = useState(firstName);
-  const [userPhone, setUserPhone] = useState(phone);
-  const [userLastName, setUserLastName] = useState(lastname);
-  const [userCity, setUserCity] = useState(city);
-  const [modify, setModify] = useState(false);
+  const [contactFirstName, setcontactFirstName] = useState(firstName);
+  const [contactPhone, setcontactPhone] = useState(phone);
+  const [contactLastName, setcontactLastName] = useState(lastname);
+  const [contactCity, setcontactCity] = useState(city);
+  const [modify, update] = useState(false);
 
   const handleClick = (contact) => {
     const edit = contact;
-    edit.phone = userPhone;
-    edit.firstName = userFirstName;
-    edit.lastname = userLastName;
-    edit.city = userCity;
+    edit.phone = contactPhone;
+    edit.firstName = contactFirstName;
+    edit.lastname = contactLastName;
+    edit.city = contactCity;
     dispatch(updateContact(edit));
-    setModify(false);
+    update(false);
   };
   return (
     <li>
@@ -30,31 +30,30 @@ const Contact = ({ dispatch, user, listId }) => {
         modify
           ? (
             <div>
-              <input type="text" value={userFirstName} name="firstName" onChange={(e) => setUserFirstName(e.target.value)} />
-              <input type="text" value={userLastName} name="lastname" onChange={(e) => setUserLastName(e.target.value)} />
-              <input type="text" value={userPhone} name="phone" onChange={(e) => setUserPhone(e.target.value)} />
-              <input type="text" value={userCity} name="city" onChange={(e) => setUserCity(e.target.value)} />
+              <input type="text" value={contactFirstName} onChange={(e) => setcontactFirstName(e.target.value)} />
+              <input type="text" value={contactLastName} onChange={(e) => setcontactLastName(e.target.value)} />
+              <input type="text" value={contactPhone} onChange={(e) => setcontactPhone(e.target.value)} />
+              <input type="text" value={contactCity} onChange={(e) => setcontactCity(e.target.value)} />
+              <button type="button" onClick={() => handleClick(user)}> Ok </button>
             </div>
           )
           : (
             <div>
-              <span>{`${firstName} ${lastname}`}</span>
+              <span>{`${firstName} `}</span>
+              <span style={{ textTransform: 'uppercase' }}>
+                {`${lastname} `}
+              </span>
               <p>{`Téléphone: ${phone}`}</p>
               <p>{`Ville: ${city}`}</p>
+              <button
+                type="button"
+                onClick={() => dispatch(deleteContact(listId))}
+              >
+                delete moi
+              </button>
+              <button type="button" onClick={() => update(true)}> Update </button>
             </div>
           )
-      }
-      <button
-        className="actions delete"
-        type="button"
-        onClick={() => dispatch(deleteContact(listId))}
-      >
-        delete moi
-      </button>
-      {
-        modify
-          ? <button className="actions validate" type="button" onClick={() => handleClick(user)}> Ok </button>
-          : <button className="actions edit" type="button" onClick={() => setModify(true)}> Update </button>
       }
     </li>
   );
