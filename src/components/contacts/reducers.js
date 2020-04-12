@@ -64,14 +64,10 @@ const addContact = (state, action) => List(state).push(action.contact).toJS();
 
 const deleteContact = (state, action) => List(state).remove(action.id);
 
-const editContact = (state, action) => ({
-  items: state.items.map((contact) => {
-    if (contact.id === action.contact.id) {
-      return Object.assign(contact, action.contact);
-    }
-    return contact;
-  }),
-});
+const editContact = (state, action) => {
+  const updateContact = List(state).update(action.id, () => action);
+  return List(state).set(updateContact).toJS();
+};
 
 
 export default (state = initialState, action) => {
@@ -80,7 +76,7 @@ export default (state = initialState, action) => {
       return addContact(state, action);
     case CONSTANTS.deleteContact:
       return deleteContact(state, action);
-    case actionsTypes.EDIT_CONTACT:
+    case CONSTANTS.updateContact:
       return editContact(state, action);
     default:
       return state.items;
