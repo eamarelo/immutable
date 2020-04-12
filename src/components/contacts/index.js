@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { deleteContact, updateContact } from './actions';
 import NameForm from './form';
 
-const Contact = ({ dispatch, user }) => {
+const Contact = ({ dispatch, user, listId }) => {
   const {
     firstName, lastname, phone, city, id,
   } = user;
@@ -38,7 +38,7 @@ const Contact = ({ dispatch, user }) => {
           )
           : (
             <div>
-              <span>{`${firstName} ${lastname}`}</span>
+              <span>{`${firstName} ${lastname} ${id}`}</span>
               <p>{`Téléphone: ${phone}`}</p>
               <p>{`Ville: ${city}`}</p>
             </div>
@@ -47,7 +47,7 @@ const Contact = ({ dispatch, user }) => {
       <button
         className="actions delete"
         type="button"
-        onClick={() => dispatch(deleteContact(id))}
+        onClick={() => dispatch(deleteContact(listId))}
       >
         delete moi
       </button>
@@ -64,8 +64,9 @@ const Contacts = ({ dispatch, contacts }) => (
   <div>
     <NameForm />
     <ul>
-      {contacts.map((user) => (
+      {contacts.map((user, id) => (
         <Contact
+          listId={id}
           key={user.id}
           dispatch={dispatch}
           user={user}
