@@ -69,10 +69,13 @@ const editContact = (state, action) => {
   return List(state).set(updateContact).toJS();
 };
 
-const searchContact = (state, action) => {
-  const updateContact = List(state).update(action.id, () => action);
-  return List(state).set(updateContact).toJS();
-};
+const searchContact = (action) => List(action.text).toJS();
+
+
+/*
+ ** INIT Contact
+ */
+const initialContact = (state) => List(state.items).toJS();
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -84,6 +87,8 @@ export default (state = initialState, action) => {
       return editContact(state, action);
     case CONSTANTS.searchContact:
       return searchContact(state, action);
+    case CONSTANTS.initialContact:
+      return initialContact(initialState, action);
     default:
       return state.items;
   }

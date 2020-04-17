@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  deleteContact, updateContact, searchContact, initialContact,
+  deleteContact, updateContact, searchContact, reinit,
 } from './actions';
 import NameForm from './form';
 
@@ -65,13 +65,11 @@ const Contact = ({ dispatch, user, listId }) => {
 const onChange = (e, dispatch, contacts) => {
   const searchText = e.target.value;
   const searchFirstname = contacts
-    .filter((contact) => contact.firstname.toLowerCase().indexOf(searchText) !== -1);
-
+    .filter((contact) => contact.firstName.toLowerCase().indexOf(searchText) !== -1);
   if (searchFirstname !== '' && searchText !== '') {
     dispatch(searchContact(searchFirstname));
   } else {
-    // attentio beug anrd
-    dispatch(initialContact(contacts));
+    dispatch(reinit(contacts));
   }
 };
 
@@ -86,7 +84,7 @@ const SearchContact = ({ dispatch, contacts }) => (
 
 const Contacts = ({ dispatch, contacts }) => (
   <div>
-    <SearchContact />
+    <SearchContact dispatch={dispatch} contacts={contacts} />
     <NameForm />
     <ul>
       {contacts.map((user, id) => (

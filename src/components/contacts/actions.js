@@ -32,7 +32,7 @@ export const searchContact = (text) => ({
   text,
 });
 
-export const initialContact = (text) => ({
+export const reinit = (text) => ({
   type: actionsTypes.INIT_CONTACT,
   text,
 });
