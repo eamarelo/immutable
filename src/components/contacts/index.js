@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { deleteContact, updateContact } from './actions';
+import {
+  deleteContact, updateContact, searchContact, reinit,
+} from './actions';
 import NameForm from './form';
 
 const Contact = ({ dispatch, user, listId }) => {
@@ -59,8 +61,30 @@ const Contact = ({ dispatch, user, listId }) => {
   );
 };
 
+
+const onChange = (e, dispatch, contacts) => {
+  const searchText = e.target.value;
+  const searchFirstname = contacts
+    .filter((contact) => contact.firstName.toLowerCase().indexOf(searchText) !== -1);
+  if (searchFirstname !== '' && searchText !== '') {
+    dispatch(searchContact(searchFirstname));
+  } else {
+    dispatch(reinit(contacts));
+  }
+};
+
+const SearchContact = ({ dispatch, contacts }) => (
+  <div className="form-group">
+    <label htmlFor="Search">
+      search :
+      <input type="text" className="form-control" name="Search" onChange={(e) => onChange(e, dispatch, contacts)} />
+    </label>
+  </div>
+);
+
 const Contacts = ({ dispatch, contacts }) => (
   <div>
+    <SearchContact dispatch={dispatch} contacts={contacts} />
     <NameForm />
     <ul>
       {contacts.map((user, id) => (
