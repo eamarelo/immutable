@@ -33,6 +33,6 @@ export const searchContact = (text) => ({
 });
 
 export const reinit = (text) => ({
-  type: actionsTypes.INIT_CONTACT,
+  type: actionsTypes.REINIT_CONTACT,
   text,
 });

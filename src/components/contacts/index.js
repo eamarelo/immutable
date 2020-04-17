@@ -65,7 +65,7 @@ const Contact = ({ dispatch, user, listId }) => {
 const onChange = (e, dispatch, contacts) => {
   const searchText = e.target.value;
   const searchFirstname = contacts
-    .filter((contact) => contact.firstName.toLowerCase().indexOf(searchText) !== -1);
+    .filter((contact) => contact.firstName.indexOf(searchText) !== -1);
   if (searchFirstname !== '' && searchText !== '') {
     dispatch(searchContact(searchFirstname));
   } else {

@@ -6,7 +6,7 @@ const CONSTANTS = {
   deleteContact: actionsTypes.DELETE_CONTACT,
   updateContact: actionsTypes.UPDATE_CONTACT,
   searchContact: actionsTypes.SEARCH_CONTACT,
-  initialContact: actionsTypes.INIT_CONTACT,
+  initialContact: actionsTypes.REINIT_CONTACT,
 };
 
 const initialState = {
@@ -69,13 +69,14 @@ const editContact = (state, action) => {
   return List(state).set(updateContact).toJS();
 };
 
-const searchContact = (action) => List(action.text).toJS();
+const searchContact = (state, action) => List(action.text).toJS();
 
 
 /*
  ** INIT Contact
  */
-const initialContact = (state) => List(state.items).toJS();
+const reinit = (state) => List(state.items).toJS();
+
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -88,7 +89,7 @@ export default (state = initialState, action) => {
     case CONSTANTS.searchContact:
       return searchContact(state, action);
     case CONSTANTS.initialContact:
-      return initialContact(initialState, action);
+      return reinit(initialState, action);
     default:
       return state.items;
   }
