@@ -8,7 +8,7 @@ import NameForm from './form';
 
 const Contact = ({ dispatch, user, listId }) => {
   const {
-    firstName, lastname, phone, city,
+    firstName, lastname, phone, city, picture,
   } = user;
 
   const [contactFirstName, setcontactFirstName] = useState(firstName);
@@ -47,13 +47,17 @@ const Contact = ({ dispatch, user, listId }) => {
               </span>
               <p>{`Téléphone: ${phone}`}</p>
               <p>{`Ville: ${city}`}</p>
-              <button
-                type="button"
-                onClick={() => dispatch(deleteContact(listId))}
-              >
-                delete moi
-              </button>
-              <button type="button" onClick={() => update(true)}> Update </button>
+              <img alt="" src={`${picture} `} />
+              <div>
+                <button
+                  type="button"
+                  onClick={() => dispatch(deleteContact(listId))}
+                >
+                  delete moi
+                </button>
+                <button type="button" onClick={() => update(true)}> Update </button>
+              </div>
+
             </div>
           )
       }
