@@ -1,42 +1,50 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
 import {
   deleteContact, updateContact, searchContact, reinit,
 } from './actions';
 import NameForm from './form';
 
-const Contact = ({ dispatch, user, listId }) => {
+/*
+* CONTACT method
+*/
+const Contact = ({ dispatch, user, ids }) => {
   const {
-    firstName, lastname, phone, city,
+    firstName, lastname, phone, city, picture,
   } = user;
+  const [contactFirstName, updateContactFirstName] = useState(firstName);
+  const [contactPhone, updateContactPhone] = useState(phone);
+  const [contactLastName, updateContactLastName] = useState(lastname);
+  const [contactCity, updateContactCity] = useState(city);
+  const [update, set] = useState(false);
 
-  const [contactFirstName, setcontactFirstName] = useState(firstName);
-  const [contactPhone, setcontactPhone] = useState(phone);
-  const [contactLastName, setcontactLastName] = useState(lastname);
-  const [contactCity, setcontactCity] = useState(city);
-  const [modify, update] = useState(false);
-
-  const handleClick = (contact) => {
+  /*
+* ON CLICK method
+*/
+  const onClick = (contact) => {
     const edit = contact;
     edit.phone = contactPhone;
     edit.firstName = contactFirstName;
     edit.lastname = contactLastName;
     edit.city = contactCity;
     dispatch(updateContact(edit));
-    update(false);
+    set(false);
   };
+
+  /*
+* ON CLICK render
+*/
   return (
     <li>
       {
-        modify
+        update
           ? (
             <div>
-              <input type="text" value={contactFirstName} onChange={(e) => setcontactFirstName(e.target.value)} />
-              <input type="text" value={contactLastName} onChange={(e) => setcontactLastName(e.target.value)} />
-              <input type="text" value={contactPhone} onChange={(e) => setcontactPhone(e.target.value)} />
-              <input type="text" value={contactCity} onChange={(e) => setcontactCity(e.target.value)} />
-              <button type="button" onClick={() => handleClick(user)}> Ok </button>
+              <input type="text" value={contactFirstName} onChange={(e) => updateContactFirstName(e.target.value)} />
+              <input type="text" value={contactLastName} onChange={(e) => updateContactLastName(e.target.value)} />
+              <input type="text" value={contactPhone} onChange={(e) => updateContactPhone(e.target.value)} />
+              <input type="text" value={contactCity} onChange={(e) => updateContactCity(e.target.value)} />
+              <button type="button" onClick={() => onClick(user)}> Ok </button>
             </div>
           )
           : (
@@ -47,13 +55,17 @@ const Contact = ({ dispatch, user, listId }) => {
               </span>
               <p>{`Téléphone: ${phone}`}</p>
               <p>{`Ville: ${city}`}</p>
-              <button
-                type="button"
-                onClick={() => dispatch(deleteContact(listId))}
-              >
-                delete moi
-              </button>
-              <button type="button" onClick={() => update(true)}> Update </button>
+              <img alt="" src={`${picture} `} />
+              <div>
+                <button
+                  type="button"
+                  onClick={() => dispatch(deleteContact(ids))}
+                >
+                  Delete
+                </button>
+                <button type="button" onClick={() => set(true)}> Update Contact</button>
+              </div>
+
             </div>
           )
       }
@@ -61,7 +73,9 @@ const Contact = ({ dispatch, user, listId }) => {
   );
 };
 
-
+/*
+* ON CHANGE method
+*/
 const onChange = (e, dispatch, contacts) => {
   const searchText = e.target.value;
   const searchFirstname = contacts
@@ -73,6 +87,9 @@ const onChange = (e, dispatch, contacts) => {
   }
 };
 
+/*
+* SEARCH render
+*/
 const SearchContact = ({ dispatch, contacts }) => (
   <div className="form-group">
     <label htmlFor="Search">
@@ -82,6 +99,10 @@ const SearchContact = ({ dispatch, contacts }) => (
   </div>
 );
 
+
+/*
+* CONTACT render
+*/
 const Contacts = ({ dispatch, contacts }) => (
   <div>
     <SearchContact dispatch={dispatch} contacts={contacts} />
@@ -89,7 +110,7 @@ const Contacts = ({ dispatch, contacts }) => (
     <ul>
       {contacts.map((user, id) => (
         <Contact
-          listId={id}
+          ids={id}
           key={user.id}
           dispatch={dispatch}
           user={user}
@@ -99,6 +120,9 @@ const Contacts = ({ dispatch, contacts }) => (
   </div>
 );
 
+/*
+* MAT TO PROPS method
+*/
 const mapToProps = (state) => {
   const { contacts } = state;
   return ({ contacts });
