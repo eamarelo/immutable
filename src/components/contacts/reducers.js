@@ -1,5 +1,6 @@
 import { List } from 'immutable';
 import actionsTypes from './actions-types';
+import { MyImmutable } from '../../myImmutable';
 
 /*
  ** CONSTANTS ACTIONS Contact
@@ -17,28 +18,28 @@ const CONSTANTS = {
  */
 const initialState = {
   items: [{
-    id: 7,
+    id: 0,
     firstName: 'Cyril',
     lastname: 'Vimard',
     phone: '0612345678',
     city: 'London',
     picture: 'https://i.picsum.photos/id/23/200/200.jpg',
   }, {
-    id: 0,
+    id: 1,
     firstName: 'Elies',
     lastname: 'AMARELO',
     phone: '0635163370',
     city: 'Valencia',
     picture: 'https://i.picsum.photos/id/42/200/200.jpg',
   }, {
-    id: 1,
+    id: 2,
     firstName: 'Jasmine',
     lastname: 'AMARELO',
     phone: '0635198240',
     city: 'Gandia',
     picture: 'https://i.picsum.photos/id/56/200/200.jpg',
   }, {
-    id: 2,
+    id: 3,
     firstName: 'Jaime',
     lastname: 'AMARELO',
     phone: '0152368820',
@@ -46,7 +47,7 @@ const initialState = {
     picture: 'https://i.picsum.photos/id/89/200/200.jpg',
   },
   {
-    id: 6,
+    id: 4,
     firstName: 'JP',
     lastname: 'CAILLET',
     phone: '0612345678',
@@ -54,7 +55,7 @@ const initialState = {
     picture: 'https://i.picsum.photos/id/74/200/200.jpg',
   },
   {
-    id: 4,
+    id: 5,
     firstName: 'Katy',
     lastname: 'AMARELO',
     phone: '0635356700',
@@ -62,14 +63,14 @@ const initialState = {
     picture: 'https://i.picsum.photos/id/41/200/200.jpg',
   },
   {
-    id: 5,
+    id: 6,
     firstName: 'Mango',
     lastname: 'Petitchien',
     phone: '0665201480',
     city: 'Beniarjo',
     picture: 'https://i.picsum.photos/id/84/200/200.jpg',
   }, {
-    id: 3,
+    id: 7,
     firstName: 'Maria-Jesus',
     lastname: 'Valor Iznardo',
     phone: '0601523688',
@@ -82,30 +83,32 @@ const initialState = {
 /*
  ** CREATE Contact
  */
-const addContact = (state, action) => List(state).push(action.contact).toJS();
+const addContact = (state, action) => MyImmutable.List(state).add(action.contact);
 
 /*
  ** DELETE Contact
  */
-const deleteContact = (state, action) => List(state).remove(action.id);
+const deleteContact = (state, action) => MyImmutable.List(state)
+  .remove(contact => state.indexOf(contact) !== action.id);
 
 /*
  ** EDIT Contact
  */
 const editContact = (state, action) => {
-  const updateContact = List(state).update(action.id, () => action);
-  return List(state).set(updateContact).toJS();
+  const updateContact = MyImmutable.List(state).update(action.id, () => action);
+  return MyImmutable.List(state).toJS(updateContact);
 };
 
 /*
  ** SEARCH Contact
  */
-const searchContact = (state, action) => List(action.text).toJS();
+const searchContact = (state, action) => MyImmutable.List(state)
+  .search(contact => state.indexOf(contact).firstName !== action.text);
 
 /*
  ** REINIT Contact
  */
-const reinit = (state) => List(state.items).toJS();
+const reinit = state => List(state.items).toJS();
 
 export default (state = initialState, action) => {
   switch (action.type) {

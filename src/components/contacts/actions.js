@@ -4,7 +4,7 @@ import actionsTypes from './actions-types';
 /**
  * ADD CONTACT
  */
-export const addContact = (contact) => ({
+export const addContact = contact => ({
   type: actionsTypes.ADD_CONTACT,
   contact,
 });
@@ -12,14 +12,14 @@ export const addContact = (contact) => ({
 /**
  * DELETE CONTACT
  */
-export const deleteContact = (id) => ({
+export const deleteContact = id => ({
   type: actionsTypes.DELETE_CONTACT,
   id,
 });
 /**
  * UPDATE CONTACT
  */
-export const updateContact = (contact) => ({
+export const updateContact = contact => ({
   type: actionsTypes.UPDATE_CONTACT,
   contact,
 });
@@ -27,7 +27,7 @@ export const updateContact = (contact) => ({
 /*
 * SEARCH contact
 */
-export const searchContact = (text) => ({
+export const searchContact = text => ({
   type: actionsTypes.SEARCH_CONTACT,
   text,
 });
@@ -36,7 +36,7 @@ export const searchContact = (text) => ({
 /*
 * REINIT contact
 */
-export const reinit = (text) => ({
+export const reinit = text => ({
   type: actionsTypes.REINIT_CONTACT,
   text,
 });

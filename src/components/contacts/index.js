@@ -40,10 +40,10 @@ const Contact = ({ dispatch, user, ids }) => {
         update
           ? (
             <div>
-              <input type="text" value={contactFirstName} onChange={(e) => updateContactFirstName(e.target.value)} />
-              <input type="text" value={contactLastName} onChange={(e) => updateContactLastName(e.target.value)} />
-              <input type="text" value={contactPhone} onChange={(e) => updateContactPhone(e.target.value)} />
-              <input type="text" value={contactCity} onChange={(e) => updateContactCity(e.target.value)} />
+              <input type="text" value={contactFirstName} onChange={e => updateContactFirstName(e.target.value)} />
+              <input type="text" value={contactLastName} onChange={e => updateContactLastName(e.target.value)} />
+              <input type="text" value={contactPhone} onChange={e => updateContactPhone(e.target.value)} />
+              <input type="text" value={contactCity} onChange={e => updateContactCity(e.target.value)} />
               <button type="button" onClick={() => onClick(user)}> Ok </button>
             </div>
           )
@@ -79,7 +79,7 @@ const Contact = ({ dispatch, user, ids }) => {
 const onChange = (e, dispatch, contacts) => {
   const searchText = e.target.value;
   const searchFirstname = contacts
-    .filter((contact) => contact.firstName.indexOf(searchText) !== -1);
+    .filter(contact => contact.firstName.indexOf(searchText) !== -1);
   if (searchFirstname !== '' && searchText !== '') {
     dispatch(searchContact(searchFirstname));
   } else {
@@ -94,7 +94,7 @@ const SearchContact = ({ dispatch, contacts }) => (
   <div className="form-group">
     <label htmlFor="Search">
       search :
-      <input type="text" className="form-control" name="Search" onChange={(e) => onChange(e, dispatch, contacts)} />
+      <input type="text" className="form-control" name="Search" onChange={e => onChange(e, dispatch, contacts)} />
     </label>
   </div>
 );
