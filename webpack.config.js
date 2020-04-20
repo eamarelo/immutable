@@ -1,17 +1,17 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const devMode = process.env.NODE_ENV !== 'production'
+const devMode = process.env.NODE_ENV !== 'production';
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: './src/index.html',
-  filename: './index.html'
-})
+  filename: './index.html',
+});
 
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
   filename: '[name].css',
-  chunkFilename: '[id].css'
-})
+  chunkFilename: '[id].css',
+});
 
 module.exports = {
   module: {
@@ -20,13 +20,14 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
-            {loader :'babel-loader'},
-            {loader :'eslint-loader',
-              options: {
-                failOnError: true,
-              }
-            }
-          ]
+          { loader: 'babel-loader' },
+          {
+            loader: 'eslint-loader',
+            options: {
+              failOnError: true,
+            },
+          },
+        ],
       },
 
       {
@@ -34,19 +35,19 @@ module.exports = {
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
+          'sass-loader',
+        ],
+      },
+    ],
   },
   devServer: {
     historyApiFallback: true,
   },
   output: {
-    publicPath: '/'
+    publicPath: '/',
   },
   plugins: [
     htmlWebpackPlugin,
-    miniCssExtractPlugin
-  ]
-}
+    miniCssExtractPlugin,
+  ],
+};
